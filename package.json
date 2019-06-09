@@ -1,0 +1,29 @@
+{
+    "name": "icons-ui",
+    "version": "0.0.1",
+    "description": "icons-ui is a package that allows multiple icon packages to be used in multiple frontend frameworks.",
+    "main": "./src/index.js",
+    "types": "./index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/joshuahylands/icons-ui.git"
+    },
+    "keywords": [
+        "icons-ui",
+        "fontawesome",
+        "material-design",
+        "ionicons",
+        "react",
+        "vue",
+        "angularjs",
+        "javascript",
+        "typescript",
+        "frontend"
+    ],
+    "author": "Joshua Hylands (https://github.com/joshuahylands)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/joshuahylands/icons-ui/issues"
+    },
+    "homepage": "https://github.com/joshuahylands/icons-ui#readme"
+}
