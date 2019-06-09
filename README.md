@@ -19,20 +19,20 @@ Before using this package please read the Usage and Terms of Use for the icon pa
 
 ## Icon Packages
 
-Icon Package | Supported | Version
-- | - | -
-<img src="./docs/fontawesome.png" height="25"/> [Fontawesome](https://fontawesome.com/) | :white_check_mark: | 5.8.2
-<img src="./docs/material.png" height="25"/> [Material Design Icons](https://material.io/) | :white_check_mark: | 
-<img src="./docs/ionicons.png" height="25"/> [Ionicons](https://ionicons.com/) | :white_check_mark: | 4.5.5
+| Icon Package | Supported | Version |
+| - | - | - |
+| <img src="./docs/fontawesome.png" height="25"/> [Fontawesome](https://fontawesome.com/) | :white_check_mark: | 5.8.2 |
+| <img src="./docs/material.png" height="25"/> [Material Design Icons](https://material.io/) | :white_check_mark: | |
+| <img src="./docs/ionicons.png" height="25"/> [Ionicons](https://ionicons.com/) | :white_check_mark: | 4.5.5 |
 
 ## Frameworks
 
-Framework | Supported | IconsUI Code
-- | - | -
-<img src="./docs/react.png" height="25"/> [React](https://reactjs.org/) | :white_check_mark: | `react`
-<img src="./docs/vue.png" height="25"/> [Vue](https://vuejs.org/) | :white_check_mark: | `vue`
-<img src="./docs/angularjs.png" height="25"/> [AngularJS](https://angularjs.org/) | :white_check_mark: | `angularjs`
-<img src="./docs/javascript.png" height="25"/> Javascript | :white_check_mark: | `js`
+| Framework | Supported | IconsUI Code |
+| - | - | - |
+| <img src="./docs/react.png" height="25"/> [React](https://reactjs.org/) | :white_check_mark: | `react` |
+| <img src="./docs/vue.png" height="25"/> [Vue](https://vuejs.org/) | :white_check_mark: | `vue` |
+| <img src="./docs/angularjs.png" height="25"/> [AngularJS](https://angularjs.org/) | :white_check_mark: | `angularjs` |
+| <img src="./docs/javascript.png" height="25"/> Javascript | :white_check_mark: | `js` |
 
 ## `Icon` Class
 
