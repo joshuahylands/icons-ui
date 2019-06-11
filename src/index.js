@@ -2,10 +2,12 @@ module.exports = (function() {
 
     'use strict';
 
-    window._iconsUI = {};
-    window._iconsUI.materialIcons = null;
-    window._iconsUI.fontawesomeIcons = null;
-    window._iconsUI.ionicons = null;
+    if (window._iconsUI == undefined) {
+        window._iconsUI = {};
+        window._iconsUI.materialIcons = null;
+        window._iconsUI.fontawesomeIcons = null;
+        window._iconsUI.ionicons = null;
+    }
 
     const iconsUrls = Object.freeze({
         fontawesome: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css',

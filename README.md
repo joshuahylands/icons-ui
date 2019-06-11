@@ -1,5 +1,9 @@
 # icons-ui
 
+![npm](https://img.shields.io/npm/v/icons-ui.svg?style=popout-square)
+![npm bundle size](https://img.shields.io/bundlephobia/min/icons-ui.svg?style=popout-square)
+![NPM](https://img.shields.io/npm/l/icons-ui.svg?style=popout-square)
+
 `icons-ui` is a package that allows multiple icon packages to be used in multiple frontend frameworks.
 
 ## Installation
