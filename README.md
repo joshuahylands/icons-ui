@@ -19,6 +19,8 @@ npm install icons-ui
 
 This package can be used with both Javascript and Typescript.
 
+Every Icon element is rendered as an HTML `<i>` tag and has a class of `icons-ui`.
+
 Before using this package please read the Usage and Terms of Use for the icon package you intend to use.
 
 ## Icon Packages
@@ -48,6 +50,11 @@ The `Icon` Class is a React Component, a Vue Component, an AngularJS Component o
 
 - `icon` : An Icon from the FontAwesomeIcons, MaterialIcons or IonIcons objects - **required**
 - `size` : `number`. Sets the CSS font size property - **optional**
+- `onClick` : `Function`. Callback function that takes an `event` attribute - **optional**
+- `href` : `string`. Adds a link to the icon - **optional**
+- `target` : `string`. Specifies where to open the link. Options listed below - **optional**
+    - `_blank` - Opens in new tab - *default*
+    - `_self` - Opens in same tab
 
 ## Icon Objects
 
@@ -144,8 +151,8 @@ const { Icon, FontAwesomeIcons, MaterialIcons } = require('icons-ui');
 FontAwesomeIcons();
 MaterialIcons();
 
-const checkIcon = Icon(FontAwesomeIcons.solid.check);
-const gamesIcon = Icon(MaterialIcons.filled.games, 36);
+const checkIcon = Icon({ icon: FontAwesomeIcons.solid.check });
+const gamesIcon = Icon({ icon: MaterialIcons.filled.games, size: 36 });
 
 const app = document.getElementById('app');
 

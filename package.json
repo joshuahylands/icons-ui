@@ -1,6 +1,6 @@
 {
     "name": "icons-ui",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "description": "icons-ui is a package that allows multiple icon packages to be used in multiple frontend frameworks.",
     "main": "./src/index.js",
     "types": "./index.d.ts",

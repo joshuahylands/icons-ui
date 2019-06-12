@@ -21,11 +21,25 @@ module.exports = (function() {
         if (props.size != null) {
             style.fontSize = props.size;
         }
-        return React.createElement('i', { className: className, style: style }, props.icon[1]);
+        if (props.onClick != null || props.href != null) {
+            className += ' icons-ui-click';
+        }
+        function onClick(event) {
+            if (props.onClick != null) {
+                props.onClick(event);
+            } else if (props.href != null) {
+                if (props.target == null || props.target == '_blank') {
+                    window.open(props.href);
+                } else if (props.target == '_self') {
+                    window.location.href = props.href;
+                }
+            }
+        }
+        return React.createElement('i', { className: className, style: style, onClick: function(event) { onClick(event) } }, props.icon[1]);
     };
 
     const VueIcon = {
-        template: '<i class="icons-ui" v-bind:class="[icon[0], sizeClass]" v-bind:style="sizeStyle">{{ icon[1] }}</i>',
+        template: '<i class="icons-ui" v-bind:class="[icon[0], sizeClass]" v-bind:style="sizeStyle" v-on:click="click($event)">{{ icon[1] }}</i>',
         props: {
             icon: {
                 type: Array,
@@ -33,6 +47,18 @@ module.exports = (function() {
             },
             size: {
                 type: [ String, Number ],
+                required: false
+            },
+            onClick: {
+                type: Function,
+                required: false
+            },
+            href: {
+                type: String,
+                required: false
+            },
+            target: {
+                type: String,
                 required: false
             }
         },
@@ -42,9 +68,25 @@ module.exports = (function() {
             if (this.size != undefined) {
                 sizeStyle.fontSize = this.size + 'px;';
             }
+            if (this.onClick != undefined || this.href != undefined) {
+                sizeClass += ' icons-ui-click';
+            }
             return {
                 sizeClass: sizeClass,
                 sizeStyle: sizeStyle
+            }
+        },
+        methods: {
+            click: function(event) {
+                if (this.onClick != undefined) {
+                    this.onClick(event);
+                } else if (this.href != undefined) {
+                    if (this.target == undefined || this.target == '_blank') {
+                        window.open(this.href);
+                    } else if (this.target == '_self') {
+                        window.location.href = this.href;
+                    }
+                }
             }
         }
     };
@@ -52,42 +94,76 @@ module.exports = (function() {
     const AngularJSIcon = function() {
         let iconsUI = angular.module('icons-ui', []);
         iconsUI.component('icon', {
-            template: '<i class="{{$ctrl.class}}" style="{{$ctrl.style}}">{{$ctrl.icon[1]}}</i>',
+            template: '<i class="{{$ctrl.class}}" style="{{$ctrl.style}}" ng-click="click($event)">{{$ctrl.icon[1]}}</i>',
             bindings: {
                 icon: '=',
-                size: '='
+                size: '=',
+                onClick: '=',
+                href: '=',
+                target: '='
             },
-            controller: function IconsUIController() {
+            controller: [ '$scope', '$window', function IconsUIController($scope, $window) {
                 this.$onInit = function() {
                     this.class = [ 'icons-ui', this.icon[0] ];
                     this.style = '';
                     if (this.size != undefined) {
                         this.style = 'font-size:' + this.size + 'px;';
                     }
+                    if (this.onClick != undefined || this.href != undefined) {
+                        this.class.push('icons-ui-click');
+                    }
                     this.class = this.class.join(' ');
-                }
-            }
+                };
+                $scope.click = function(event) {
+                    if ($scope.$ctrl.onClick != undefined) {
+                        $scope.$ctrl.onClick(event);
+                    } else if ($scope.$ctrl.href != undefined) {
+                        if ($scope.$ctrl.target == undefined || $scope.$ctrl.target == '_blank') {
+                            window.open($scope.$ctrl.href);
+                        } else if ($scope.$ctrl.target == '_self') {
+                            window.location.href = $scope.$ctrl.href;
+                        }
+                    }
+                };
+            }]
         });
 
         return 'icons-ui';
     };
 
-    const JSIcon = function(icon, size) {
-        size = size || ''
+    const JSIcon = function(data) {
+        data.size = data.size || ''
         let style = '';
 
         const iTag = document.createElement('i');
 
-        if (size != undefined) {
-            style = 'font-size:' + size + 'px;';
-            size = '';
+        if (data.size != undefined) {
+            style = 'font-size:' + data.size + 'px;';
+            data.size = '';
         }
 
-        iTag.className = 'icons-ui ' + icon[0];
+        iTag.className = 'icons-ui ' + data.icon[0];
         if (style != '') {
             iTag.style = style;
         }
-        iTag.innerHTML = icon[1];
+        iTag.innerHTML = data.icon[1];
+
+        if (data.onClick != undefined || data.href != undefined) {
+            iTag.className += ' icons-ui-click';
+        }
+
+        iTag.addEventListener('click', function(event) {
+            if (data.onClick != undefined) {
+                data.onClick(event);
+            } else if (data.href != undefined) {
+                if (data.target == undefined || data.target == '_blank') {
+                    window.open(data.href);
+                } else if (data.target == '_self') {
+                    window.location.href = data.href;
+                }
+            }
+        });
+
         return iTag;
     };    
 
@@ -99,16 +175,15 @@ module.exports = (function() {
         document.head.appendChild(stylesheet);
     };
 
-    const req = function(url) {
-        let xhr = new XMLHttpRequest();
-        xhr.onload = function() {
-            console.log(xhr.response);
-        };
-        xhr.responseType = 'json';
-        xhr.open('GET', url);
-        xhr.send();
-    };
-
+    const InitClickStylesheet = function() {
+        if (document.getElementsByClassName('icons-ui-click-styles-embedded').length == 0) {
+            const stylesheet = document.createElement('style');
+            stylesheet.innerHTML = '.icons-ui-click{cursor:pointer;}';
+            stylesheet.className = 'icons-ui-click-styles-embedded';
+            document.head.appendChild(stylesheet);
+        }
+    }
+    
     class FObject extends Function {
         constructor(func) {
             super('return this.func();');
@@ -121,6 +196,7 @@ module.exports = (function() {
         let obj = new FObject(function() {
             if (document.getElementsByClassName('icons-ui-' + iconsName + '-embedded').length == 0) {
                 InitStylesheet(iconsName);
+                InitClickStylesheet();
                 const iconData = require('./icons/' + iconsName);
                 const iconKeys = Object.keys(iconData);
                 for (let i = 0; i < iconKeys.length; i++) {
