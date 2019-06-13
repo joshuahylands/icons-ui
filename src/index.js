@@ -38,6 +38,29 @@ module.exports = (function() {
         return React.createElement('i', { className: className, style: style, onClick: function(event) { onClick(event) } }, props.icon[1]);
     };
 
+    const PreactIcon = function(props) {
+        let className = 'icons-ui ' + props.icon[0];
+        let style = {};
+        if (props.size != null) {
+            style.fontSize = props.size;
+        }
+        if (props.onClick != null || props.href != null) {
+            className += ' icons-ui-click';
+        }
+        function onClick(e) {
+            if (props.onClick != null) {
+                props.onClick(e);
+            } else if (props.href != null) {
+                if (props.target == null || props.target == '_blank') {
+                    window.open(props.href);
+                } else if (props.target == '_self') {
+                    window.location.href = props.href;
+                }
+            }
+        }
+        return preact.h('i', { class: className, style: style, onClick: function(e) { onClick(e) } }, props.icon[1]);
+    };
+
     const VueIcon = {
         template: '<i class="icons-ui" v-bind:class="[icon[0], sizeClass]" v-bind:style="sizeStyle" v-on:click="click($event)">{{ icon[1] }}</i>',
         props: {
@@ -235,6 +258,8 @@ module.exports = (function() {
 
             if (window.React != undefined && frameworkUsed == undefined || frameworkUsed == 'react') {
                 return ReactIcon;
+            } else if (window.preact != undefined && frameworkUsed == undefined || frameworkUsed == 'preact') {
+                return PreactIcon;
             } else if (window.Vue != undefined && frameworkUsed == undefined || frameworkUsed == 'vue') {
                 return VueIcon;
             } else if (window.angular != undefined && frameworkUsed == undefined || frameworkUsed == 'angularjs') {

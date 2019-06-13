@@ -36,6 +36,7 @@ Before using this package please read the Usage and Terms of Use for the icon pa
 | Framework | Supported | IconsUI Code |
 | - | - | - |
 | <img src="./docs/react.png" height="25"/> [React](https://reactjs.org/) | :white_check_mark: | `react` |
+| <img src="./docs/preact.png" height="25"/> [Preact](https://preactjs.com/) | :white_check_mark: | `preact` |
 | <img src="./docs/vue.png" height="25"/> [Vue](https://vuejs.org/) | :white_check_mark: | `vue` |
 | <img src="./docs/angularjs.png" height="25"/> [AngularJS](https://angularjs.org/) | :white_check_mark: | `angularjs` |
 | <img src="./docs/javascript.png" height="25"/> Javascript | :white_check_mark: | `js` |
@@ -94,6 +95,18 @@ ReactDOM.render(
     </div>,
     document.getElementById('app')
 );
+```
+
+**Preact**
+```javascript
+import { Icon, FontAwesomeIcons, MaterialIcons } from 'icons-ui';
+
+render((
+    <div>
+        <Icon icon={ FontAwesomeIcons.solid.check }/>
+        <Icon icon={ MaterialIcons.filled.games } size={ 36 }/>
+    </div>
+), document.body);
 ```
 
 **Vue**
