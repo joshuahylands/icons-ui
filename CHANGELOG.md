@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.3.0
+- Added support for [Bootstrap Glyphicons](https://getbootstrap.com/docs/3.3/components/#glyphicons)
+
 ## v0.2.0
 - Added support for the [Preact](https://preactjs.com/) framework.
 

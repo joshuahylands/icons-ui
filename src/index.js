@@ -12,7 +12,8 @@ module.exports = (function() {
     const iconsUrls = Object.freeze({
         fontawesome: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css',
         materialicons: 'https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp',
-        ionicons: 'https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css'
+        ionicons: 'https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css',
+        glyphicons: 'https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css'
     });
 
     const ReactIcon = function(props) {
@@ -251,6 +252,13 @@ module.exports = (function() {
                 window._iconsUI.ionicons = InitIcons('ionicons');
             }
             return window._iconsUI.ionicons;
+        })(),
+
+        Glyphicons: (function() {
+            if (window._iconsUI.glyphicons == null) {
+                window._iconsUI.glyphicons = InitIcons('glyphicons');
+            }
+            return window._iconsUI.glyphicons;
         })(),
 
         Icon: (function() {
