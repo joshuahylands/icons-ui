@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.4.0
+- Added support for `className` and `id` attributes.
+
 ## v0.3.0
 - Added support for [Bootstrap Glyphicons](https://getbootstrap.com/docs/3.3/components/#glyphicons)
 

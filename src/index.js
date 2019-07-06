@@ -17,7 +17,10 @@ module.exports = (function() {
     });
 
     const ReactIcon = function(props) {
+        let iconClass = props.className || '';
+        let iconId = props.id || '';
         let className = 'icons-ui ' + props.icon[0];
+        className += ' ' + iconClass;
         let style = {};
         if (props.size != null) {
             style.fontSize = props.size;
@@ -36,11 +39,14 @@ module.exports = (function() {
                 }
             }
         }
-        return React.createElement('i', { className: className, style: style, onClick: function(event) { onClick(event) } }, props.icon[1]);
+        return React.createElement('i', { className: className, id: iconId, style: style, onClick: function(event) { onClick(event) } }, props.icon[1]);
     };
 
     const PreactIcon = function(props) {
+        let iconClass = props.className || '';
+        let iconId = props.id || '';
         let className = 'icons-ui ' + props.icon[0];
+        className += ' ' + iconClass;
         let style = {};
         if (props.size != null) {
             style.fontSize = props.size;
@@ -59,11 +65,11 @@ module.exports = (function() {
                 }
             }
         }
-        return preact.h('i', { class: className, style: style, onClick: function(e) { onClick(e) } }, props.icon[1]);
+        return preact.h('i', { class: className, id: iconId, style: style, onClick: function(e) { onClick(e) } }, props.icon[1]);
     };
 
     const VueIcon = {
-        template: '<i class="icons-ui" v-bind:class="[icon[0], sizeClass]" v-bind:style="sizeStyle" v-on:click="click($event)">{{ icon[1] }}</i>',
+        template: '<i class="icons-ui" v-bind:class="[icon[0], sizeClass, iconClass]" v-bind:id="[iconId]" v-bind:style="sizeStyle" v-on:click="click($event)">{{ icon[1] }}</i>',
         props: {
             icon: {
                 type: Array,
@@ -84,6 +90,14 @@ module.exports = (function() {
             target: {
                 type: String,
                 required: false
+            },
+            className: {
+                type: String,
+                required: false
+            },
+            id: {
+                type: String,
+                required: false
             }
         },
         data: function() {
@@ -97,7 +111,9 @@ module.exports = (function() {
             }
             return {
                 sizeClass: sizeClass,
-                sizeStyle: sizeStyle
+                sizeStyle: sizeStyle,
+                iconClass: this.className || '',
+                iconId: this.id || ''
             }
         },
         methods: {
@@ -118,17 +134,21 @@ module.exports = (function() {
     const AngularJSIcon = function() {
         let iconsUI = angular.module('icons-ui', []);
         iconsUI.component('icon', {
-            template: '<i class="{{$ctrl.class}}" style="{{$ctrl.style}}" ng-click="click($event)">{{$ctrl.icon[1]}}</i>',
+            template: '<i class="{{$ctrl.class}}" id="{{$ctrl.iconId}}" style="{{$ctrl.style}}" ng-click="click($event)">{{$ctrl.icon[1]}}</i>',
             bindings: {
                 icon: '=',
                 size: '=',
                 onClick: '=',
                 href: '=',
-                target: '='
+                target: '=',
+                className: '=',
+                id: '='
             },
             controller: [ '$scope', '$window', function IconsUIController($scope, $window) {
                 this.$onInit = function() {
-                    this.class = [ 'icons-ui', this.icon[0] ];
+                    const iconClass = this.className || '';
+                    this.class = [ 'icons-ui', this.icon[0], iconClass ];
+                    this.iconId = this.id || '';
                     this.style = '';
                     if (this.size != undefined) {
                         this.style = 'font-size:' + this.size + 'px;';
@@ -157,6 +177,7 @@ module.exports = (function() {
 
     const JSIcon = function(data) {
         data.size = data.size || ''
+        const iconClass = data.className || '';
         let style = '';
 
         const iTag = document.createElement('i');
@@ -166,7 +187,9 @@ module.exports = (function() {
             data.size = '';
         }
 
-        iTag.className = 'icons-ui ' + data.icon[0];
+        iTag.id = data.id || '';
+
+        iTag.className = 'icons-ui ' + data.icon[0] + ' ' + iconClass;
         if (style != '') {
             iTag.style = style;
         }
