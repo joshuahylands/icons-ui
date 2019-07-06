@@ -57,6 +57,8 @@ The `Icon` Class is a React Component, a Vue Component, an AngularJS Component o
 - `target` : `string`. Specifies where to open the link. Options listed below - **optional**
     - `_blank` - Opens in new tab - *default*
     - `_self` - Opens in same tab
+- `className` : `string` - Sets the HTML `class` attribute - **optional**
+- `id` : `string` - Sets the HTML `id` attribute - **optional**
 
 ## Icon Objects
 

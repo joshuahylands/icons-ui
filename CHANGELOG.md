@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.4.1
+- Updated README for **v0.4.0**
+
 ## v0.4.0
 - Added support for `className` and `id` attributes.
 
