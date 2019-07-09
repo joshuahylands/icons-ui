@@ -1,4 +1,4 @@
-// Type definitions for icons-ui 0.3.0
+// Type definitions for icons-ui 0.4.1
 // Project: https://github.com/joshuahylands/icons-ui
 // Definitions by: Joshua Hylands <https://github.com/joshuahylands>
 
